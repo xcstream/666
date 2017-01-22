@@ -47,5 +47,9 @@ def api_login():
     else:
         return statusResponse(R403_FORBIDDEN)
 
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html'), 404
+
 if __name__ == '__main__':
     app.run()

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
+
+    <title>login</title>
+</head>
+<body>
+    <div id="app">
+
+        <a href="/">返回主页</a>
+
+        <div class="input-group">
+          <span class="input-group-addon">用户名</span>
+          <input type="text" class="form-control" placeholder="用户名">
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-addon">密码</span>
+          <input type="password" class="form-control" placeholder="密码">
+        </div>
+
+         <div class="input-group">
+          <span class="input-group-addon">重复密码</span>
+          <input type="password" class="form-control" placeholder="重复密码">
+         </div>
+
+        <button @click="submit" type="button" class="btn btn-default">提交</button>
+    </div>
+    <script>
+        var app = new Vue({
+          el: '#app',
+          data: {
+              username:'',
+              password:'',
+              password2:'',
+          },
+        methods: {
+            submit: function () {
+                fetch('/api/login',{
+                    method:"POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({username:this.$data.username,password:this.$data.password}),
+                    credentials: 'include'
+                }).then( res => {
+                        res.json().then( obj => {
+                            console.log(obj)
+                        })
+
+                    }
+                )
+            }
+        }})
+    </script>
+</body>
+</html>
