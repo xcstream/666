@@ -33,6 +33,11 @@ def plus(a1=0,a2=0):
 def login(username=None):
     return render_template('login.html')
 
+@app.route('/register')
+@app.route('/register/')
+def register(username=None):
+    return render_template('register.html')
+
 @app.route('/api/login' , methods=['GET','POST'])
 def api_login():
     username = request.json['username']
